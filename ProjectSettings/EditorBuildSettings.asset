@@ -11,4 +11,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Slimy.unity
     guid: b9c06acd03e222a4f94a1537711dd5ac
+  - enabled: 1
+    path: Assets/Scenes/Pintas.unity
+    guid: cd3a0be2a7ed7804da246e629ba32302
+  - enabled: 1
+    path: Assets/Scenes/Rockty.unity
+    guid: 5beb77ce46f99cf49953d359ac160a22
+  - enabled: 1
+    path: Assets/Scenes/Soundy.unity
+    guid: 98350201686984a47837582763379f1c
   m_configObjects: {}
