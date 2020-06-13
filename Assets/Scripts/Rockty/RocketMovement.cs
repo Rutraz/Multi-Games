@@ -5,15 +5,15 @@ using UnityEngine;
 
 public class RocketMovement : MonoBehaviour
 {
-    
+    public GameObject obj;
+
     private Rigidbody2D rb;
     public float speed = 0;
 
     private float clickStart;
     private bool moreThenOne;
 
-
-
+    public GameObject GameFinish;
     void Start()
     {
         rb = this.GetComponent<Rigidbody2D>();
@@ -34,31 +34,35 @@ public class RocketMovement : MonoBehaviour
         rb.velocity = new Vector2(0, speed);
 
         if (Input.GetMouseButtonDown(0))
-     {
+        {
             clickStart = Time.time;
-            speed = 5;
+            speed = 10;
+            obj.SetActive(true);
         }
-
-        if (Input.GetMouseButtonUp(0) && Time.time - clickStart >= 1)
+        if (Input.GetMouseButtonUp(0))
         {
-            moreThenOne = true;
-            speed = 5;
-        }
-        if (Input.GetMouseButtonUp(0) && Time.time - clickStart < 1)
-        {
+            clickStart = Time.time;
             speed = 0;
-            moreThenOne = false;
+            obj.SetActive(false);
         }
+       
+       
+       
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-
+        
         if (collision.tag == "Astroid")
         {
-            speed = -3;
+          
+        } 
 
+        if (collision.tag == "Moon")
+        {
+           GameFinish.SetActive(true);
         }
+        
     }
 
 }

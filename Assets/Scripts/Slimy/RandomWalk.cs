@@ -52,7 +52,7 @@ public class RandomWalk : MonoBehaviour
         }
     }
 
-    Vector2 GetRandomPosition()
+Vector2 GetRandomPosition()
     {
         float randomX = UnityEngine.Random.Range(minX, maxX);
         float randomY = UnityEngine.Random.Range(minY, maxY);
