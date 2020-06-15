@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 public class RocketMovement : MonoBehaviour
 {
@@ -13,10 +13,21 @@ public class RocketMovement : MonoBehaviour
     private float clickStart;
     private bool moreThenOne;
 
+
     public GameObject GameFinish;
+    bool timerActive = false;
+
+//Time
+    public float timestart;
+    public Text textBox;
+    public GameObject timeLost;
+
+    public GameObject[] counts;
+     public float timeBetween = 0.1f; // Time in seconds
     void Start()
     {
         rb = this.GetComponent<Rigidbody2D>();
+        textBox.text = timestart.ToString("F2");
     }
 
 
@@ -31,6 +42,15 @@ public class RocketMovement : MonoBehaviour
     void Update()
     {
         
+        if (timerActive)
+        {
+            timestart += Time.deltaTime;
+            textBox.text = timestart.ToString("F2");
+        }
+
+
+
+
         rb.velocity = new Vector2(0, speed);
 
         if (Input.GetMouseButtonDown(0))
@@ -38,6 +58,7 @@ public class RocketMovement : MonoBehaviour
             clickStart = Time.time;
             speed = 10;
             obj.SetActive(true);
+            timerActive = true;
         }
         if (Input.GetMouseButtonUp(0))
         {
@@ -50,20 +71,39 @@ public class RocketMovement : MonoBehaviour
        
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        
-        if (collision.tag == "Astroid")
-        {
-          
-        } 
+   void OnCollisionEnter2D(Collision2D other)
+     {
+         if (other.gameObject.tag == "Asteroid")
+         {
+              
+            //timeLost.SetActive(true);
 
-        if (collision.tag == "Moon")
+             StartCoroutine(Count());
+
+
+             
+
+         }
+
+          if (other.gameObject.tag == "Moon")
         {
            GameFinish.SetActive(true);
+            timerActive = false;
         }
-        
-    }
+     }
+    
+
+
+public IEnumerator Count() 
+     {
+
+           timeLost.SetActive(true);
+            timestart++;
+            yield return new WaitForSeconds(timeBetween); // Waits for the time set in timeBetween, affected by timeScale.
+
+           
+             timeLost.SetActive(false);
+     }
 
 }
 

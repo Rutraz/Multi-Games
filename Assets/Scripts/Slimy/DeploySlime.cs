@@ -46,7 +46,7 @@ public class DeploySlime : MonoBehaviour
             spawnEnemy();
             
             respawnTime = Mathf.Lerp(minSpawn, maxSpawn, GetDifficultyPercent());
-            UnityEngine.Debug.Log(Mathf.Round(timestart));
+
            
         }
 
