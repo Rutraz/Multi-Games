@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 2980459911793922258}
   - component: {fileID: 2980459911793922271}
   - component: {fileID: 1705943093879614538}
-  - component: {fileID: 6389255901007701949}
   m_Layer: 0
   m_Name: astroid
   m_TagString: Asteroid
@@ -134,18 +133,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cf87efc59422aa43bb8d16ee96688b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minSpeed: 0.8
-  maxSpeed: 1
+  minSpeed: 1
+  maxSpeed: 2
   secondsToMaxDifficulty: 4
---- !u!114 &6389255901007701949
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2980459911793922259}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 204b620d37ef2b345a040136e479b4f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

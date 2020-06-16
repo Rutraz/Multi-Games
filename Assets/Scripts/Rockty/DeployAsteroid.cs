@@ -36,7 +36,7 @@ public class DeployAsteroid : MonoBehaviour
     {
         GameObject a = Instantiate(AsteroidPrefab) as GameObject;
        // a.transform.position = new Vector2(Random.Range(-screenBounds.x, screenBounds.x  ) , screenBounds.y * 2);
-        a.transform.position = new Vector2(screenBounds.x*1, Random.Range(screenBounds.y, screenBounds.y*15));
+        a.transform.position = new Vector2(screenBounds.x*1, Random.Range(screenBounds.y, screenBounds.y*22));
     }
 
      IEnumerator asteroidWave()
