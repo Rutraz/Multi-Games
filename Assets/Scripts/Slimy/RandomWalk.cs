@@ -24,11 +24,19 @@ public class RandomWalk : MonoBehaviour
 
     public GameObject GameOver_Panel;
 
+    public AudioClip Audio;
+    AudioSource audioData;
+
+    public float timeBetween = 0.5f; // Time in seconds
+
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 1;
         targetPosition = GetRandomPosition();
         textBox.text = timestart.ToString("F2");
+        audioData = GetComponent<AudioSource>();
+        audioData.Play(0);
     }
 
     // Update is called once per frame
@@ -67,6 +75,9 @@ Vector2 GetRandomPosition()
             timerActive = false;
             GameOver_Panel.SetActive(true);
 
+             StartCoroutine(TakeHit()); //starts de coroutine
+           
+            
         } 
     }
 
@@ -74,4 +85,15 @@ Vector2 GetRandomPosition()
     {
         return Mathf.Clamp01(Time.timeSinceLevelLoad / secondsToMaxDifficulty);  //vai nos devolver o valor de percentagem entre 0 e 1 da dificuldade desde que começou o jogo
     }
+
+    public IEnumerator TakeHit() // active and disactivate de number of secs lost
+     {
+
+           audioData.PlayOneShot(Audio, 1F);
+        
+           yield return new WaitForSeconds(timeBetween); // Waits for the time set in timeBetween, affected by timeScale.
+
+
+           audioData.Stop();
+     }
 }

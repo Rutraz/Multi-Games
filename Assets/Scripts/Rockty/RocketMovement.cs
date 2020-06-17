@@ -20,16 +20,24 @@ public class RocketMovement : MonoBehaviour
 
     public float timestart; //Time
 
-
+    float volume = 1f;
     public Text textBox;
     public GameObject GameFinish;
     public GameObject timeLost;
+
+    public AudioClip Audio;
+  
+    
+    AudioSource audioData;
 
      public float timeBetween = 0.1f; // Time in seconds
     void Start()
     {
         rb = this.GetComponent<Rigidbody2D>();
         textBox.text = timestart.ToString("F2");
+        audioData = GetComponent<AudioSource>();
+        audioData.Play(0);
+       
     }
 
 
@@ -58,7 +66,11 @@ public class RocketMovement : MonoBehaviour
             clickStart = Time.time;
             speed = 10;
             obj.SetActive(true);// "animation"
-            
+           
+
+           audioData.PlayOneShot(Audio, 1F);
+           // AudioSource.PlayClipAtPoint(Audio, transform.position, volume);
+           
         }
 
         //when we stop clicking the rocket stop
@@ -77,7 +89,7 @@ public class RocketMovement : MonoBehaviour
          {
               
              StartCoroutine(TakeHit()); //starts de coroutine
-
+           
          }
 
           if (other.gameObject.tag == "Moon") // when Rocket collid with the moon
@@ -85,6 +97,7 @@ public class RocketMovement : MonoBehaviour
            GameFinish.SetActive(true);
            timerActive = false;
            Time.timeScale = 0; //para tudo
+           
           // EditorApplication.isPaused = true; // pause everything
         }
      }
@@ -95,6 +108,7 @@ public IEnumerator TakeHit() // active and disactivate de number of secs lost
      {
 
            timeLost.SetActive(true);
+          
            timestart++;
            yield return new WaitForSeconds(timeBetween); // Waits for the time set in timeBetween, affected by timeScale.
            timeLost.SetActive(false);
